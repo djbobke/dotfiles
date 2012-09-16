@@ -45,3 +45,4 @@ export PATH=~/bin:$PATH
 
 # Add sbin to $PATH since some OS-es dont support it
 export PATH=$PATH:/sbin:/usr/sbin
+export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'

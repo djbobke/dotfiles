@@ -1,0 +1,35 @@
+startup_message off
+defscrollback 20000
+autodetach on
+vbell off
+shell bash
+ 
+# F12: next window
+# F11: prev window
+# F10: shift focus to other viewport (only when split)
+# F9 : split current viewport
+# F8 : remove current viewport (only when split)
+bindkey -k F1 prev
+bindkey -k F2 next
+bindkey -k k; focus
+bindkey -k k9 split
+bindkey -k k8 remove
+caption splitonly
+
+backtick 1 60 60 echo $LOGNAME
+
+# Show 'task bar' on last line
+hardstatus on
+hardstatus alwayslastline
+# No spacing
+# hardstatus string '%{= kw}[%{G}%1`@%H%{w}][%=%-Lw%{kR}(%{W}%n*%f%t%{kR})%{w}%+Lw%=%{w}][%{R}%l%{w}][%{B}%d-%m-%y %{W}%c:%s%{w}]'
+# With Spacing
+hardstatus string '%{= kw}[ %{G}%1`@%H%{w} ][ %=%-Lw%{kR}(%{W}%n*%f%t%{kR})%{w}%+Lw%= %{w}][ %{R}%l %{w}][ %{B}%d-%m-%y %{W}%c:%s%{w} ]'
+
+# Default setup: four bashes
+screen 0 bash
+screen 1 bash
+screen 2 bash
+screen 3 bash
+next
+

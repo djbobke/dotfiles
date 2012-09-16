@@ -1,0 +1,146 @@
+#!/bin/bash
+
+VERSION="0.2.1"
+MAXIP=254
+
+SUBNET=$1
+DELAY=$2
+DUMPONCE=$3
+LOOKUP=$4
+
+# Show help if there are no parameters
+if [[ -z $SUBNET ]]; then
+    echo "Subnet monitor utility v$VERSION (c) 2004 S.V.Groeneveld"
+    echo
+    echo "Usage: $0 <net> [<delay>] [<dumponce>] [<nslookup>]"
+    echo "   <net> is the subnet to ping and should have format ###.###.###"
+    echo "   <delay> is the delay between successive ping sequences (default=5)"
+    echo "   <dumponce> is 1 or 0. 1 for dump subnet and exit. (default=0)"
+    echo "   <nslookup> is 1 or 0. 1 for looking up dns-names. (default=0)"
+    echo
+    echo "Example: $0 192.168.1"
+    exit
+fi
+
+# Set default delay, if not specified
+if [[ -z $DELAY ]]; then
+    DELAY=5
+fi
+if [[ -z $DUMPONCE ]]; then
+    DUMPONCE=0
+fi
+if [[ -z $LOOKUP ]]; then
+    LOOKUP=0
+fi
+
+# Without this, everything would flash the first time...
+FIRSTRUN=1
+
+# Repeat forever...
+while [[ $DUMPONCE = 0 || $FIRSTRUN = 1 ]]; do
+
+    # Step 1: Start ping processes
+    echo -n "."
+    for (( i=1 ; i<=$MAXIP ; i++ )); do
+        ping -w 1 -c 1 ${SUBNET}.$i 2> /dev/null 1>/dev/null &
+        PID[$i]=$!
+    done;
+
+    # Step 2: Collect results
+    echo -n "."
+    for (( i=1 ; i<=$MAXIP ; i++ )); do
+        wait ${PID[i]} 2>/dev/null
+        ERR[$i]=$?
+    done;
+
+
+    # Step 3: Build color table
+    echo -n "."
+   
+    unset OUTPUT
+    # Display first broadcast address
+    OUTPUT[1]="\e[1;30m000 "
+    
+    # Display results
+    col=2
+    row=1
+    for (( i=1 ; i<=$MAXIP ; i++ )); do
+    
+        # If item has changed, flash the number
+        if [[ ${OLD[$i]} != ${ERR[$i]} ]]; then
+            FLASH=5
+        else
+            FLASH=0
+        fi
+        
+        # Unless it's the first time
+        if (( $FIRSTRUN )); then
+            FLASH=0
+        fi
+
+        # If IP is active, show in green, otherwise in red
+        if (( ${ERR[$i]} )); then
+            KLEUR=31
+            NSLOOKUP[$i]=0;
+        else
+            KLEUR=32
+            NSLOOKUP[$i]=1;
+        fi
+
+        # Show number
+        OUTPUT[$row]=${OUTPUT[$row]}$(printf "\e[${FLASH};${KLEUR}m%03d " $i)
+
+        if (( $col > 15 )); then
+            col=1
+            row=$((row+1))
+        else
+            col=$((col+1))
+        fi
+    done
+
+    # Display last broadcast address
+    OUTPUT[$row]=${OUTPUT[$row]}"\e[1;30m255\e[0m"
+
+    # Step 4: Count active hosts and remember old results
+    echo -n "."
+    # Remember old values and count active hosts
+    COUNT=0
+    for (( i=1 ; i<=$MAXIP ; i++ )); do
+        OLD[$i]=${ERR[$i]}
+        if (( ! ${ERR[$i]} )); then
+            COUNT=$((COUNT+1))
+        fi
+    done    
+
+    # Clear screen only the first time, otherwise jump to top
+    if [ $DUMPONCE = 0 ]; then
+#        if (( $FIRSTRUN )); then
+            clear
+#        else
+#            echo -n -e "\e[1;1H"
+#        fi
+    fi
+
+    # Display results
+    for (( i=1 ; i<=$row ; i++)); do
+        echo -e ${OUTPUT[$i]}
+    done
+
+    # Display statistics
+    echo "Alive: $COUNT/$MAXIP    "
+    echo -n -e "\e[K"
+    if [[ $LOOKUP = 1 ]]; then
+        for (( i=1 ; i<=$MAXIP ; i++ )); do
+            if [[ ${NSLOOKUP[$i]} = 1 ]]; then
+                echo $i `nslookup ${SUBNET}.$i | grep name | cut -d '=' -f 2 | tr -d ' '`
+            fi
+        done
+    fi
+    # and wait a bit...
+    if [ $DUMPONCE = 0 ]; then
+        sleep $DELAY
+    fi
+    
+    FIRSTRUN=0
+
+done

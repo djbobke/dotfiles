@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+ignores="install readme"
+
+here="$(dirname "$0")"
+here="$(cd "$here"; pwd)"
+
+for file in "$here"/*; do
+  name="$(basename "$file" .md)"
+  [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
+
+  if [[ !( ${ignores} =~ $name || -e ~/$dotname || -d $file/.git ) ]]; then
+    ln -sfhv ${file#$HOME/} "${HOME}/${dotname}"
+  fi
+done

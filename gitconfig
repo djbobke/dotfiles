@@ -1,0 +1,63 @@
+[user]
+name = Rik van der Heijden
+email = info@rikict.com
+
+[github]
+user = djbobke
+
+[core]
+
+[color]
+diff = auto
+branch = auto
+status = auto
+interactive = auto
+ui = auto
+
+[diff]
+renames = true
+tool = meld
+
+[alias]
+st = status
+d = diff
+ci = commit -v
+cia = commit -v -a
+co = checkout
+cp = cherry-pick
+l = log
+ll = log -p
+lt = log trunk..
+llt = log -p trunk..
+lm = log master..
+llm = log -p master..
+b = branch -va
+cherry-pick-svn =  !GIT_EDITOR='sed -i /^git-svn-id:/d' git cherry-pick -e
+spull = !git svn fetch && git svn rebase
+spush = svn dcommit
+targz = !git archive --prefix=`basename $PWD`/ master | gzip > `basename $PWD`.tar.gz
+targz2 = !git archive --prefix=`basename $PWD`/ master | gzip > `basename $PWD`_tar_gz
+
+# log
+l = log --graph --date=short
+changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+
+[merge]
+summary = true
+verbosity = 1
+
+[format]
+pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+
+[branch]
+autosetupmerge = true
+[mergetool "meld"]
+cmd = meld
+trustExitCode = true
+
+[gui]
+fontdiff = -family Courier -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+fontui = -family \"DejaVu Sans\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+
+[push]
+default = tracking

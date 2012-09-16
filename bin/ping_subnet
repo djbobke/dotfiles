@@ -56,24 +56,24 @@ while [[ $DUMPONCE = 0 || $FIRSTRUN = 1 ]]; do
 
     # Step 3: Build color table
     echo -n "."
-   
+
     unset OUTPUT
     # Display first broadcast address
     OUTPUT[1]="\e[1;30m000 "
-    
+
     # Display results
     col=2
     row=1
     for (( i=1 ; i<=$MAXIP ; i++ )); do
-    
+
         # If item has changed, flash the number
         if [[ ${OLD[$i]} != ${ERR[$i]} ]]; then
             FLASH=5
         else
             FLASH=0
         fi
-        
-        # Unless it's the first time
+
+        # Unless its the first time
         if (( $FIRSTRUN )); then
             FLASH=0
         fi
@@ -110,7 +110,7 @@ while [[ $DUMPONCE = 0 || $FIRSTRUN = 1 ]]; do
         if (( ! ${ERR[$i]} )); then
             COUNT=$((COUNT+1))
         fi
-    done    
+    done
 
     # Clear screen only the first time, otherwise jump to top
     if [ $DUMPONCE = 0 ]; then
@@ -140,7 +140,7 @@ while [[ $DUMPONCE = 0 || $FIRSTRUN = 1 ]]; do
     if [ $DUMPONCE = 0 ]; then
         sleep $DELAY
     fi
-    
+
     FIRSTRUN=0
 
 done

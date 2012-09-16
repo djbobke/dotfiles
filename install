@@ -11,6 +11,6 @@ for file in "$here"/*; do
   [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
 
   if [[ !( ${ignores} =~ $name || -e ~/$dotname || -d $file/.git ) ]]; then
-    ln -sfhv ${file#$HOME/} "${HOME}/${dotname}"
+    ln -sfv ${file#$HOME/} "${HOME}/${dotname}"
   fi
 done

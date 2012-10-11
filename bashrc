@@ -43,6 +43,8 @@ fi
 export PS1="\[\e[0;32m\]\u\[\e[m\]@\[\e[0;31m\]\h \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[0m\]"
 export PATH=~/bin:$PATH
 
-# Add sbin to $PATH since some OS-es dont support it
+# Add sbin to $PATH since some OS-es dont do this by default
 export PATH=$PATH:/sbin:/usr/sbin
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+export SVN_EDITOR=nano
+export EDITOR=nano

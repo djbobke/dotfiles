@@ -1,0 +1,54 @@
+# nanorc
+set rebindkeypad
+set smooth
+set suspend
+
+include "/usr/share/nano/asm.nanorc"
+include "/usr/share/nano/groff.nanorc"
+include "/usr/share/nano/java.nanorc"
+include "/usr/share/nano/mutt.nanorc"
+include "/usr/share/nano/nanorc.nanorc"
+include "/usr/share/nano/perl.nanorc"
+include "/usr/share/nano/python.nanorc"
+include "/usr/share/nano/sh.nanorc"
+include "/usr/share/nano/c.nanorc"
+include "/usr/share/nano/man.nanorc"
+include "/usr/share/nano/patch.nanorc"
+include "/usr/share/nano/pov.nanorc"
+include "/usr/share/nano/ruby.nanorc"
+include "/usr/share/nano/tex.nanorc"
+
+# HTML etc
+syntax "ml" ".*\.([jrs]?html?|xml|sgml?|tpl)$"
+color white "^.+$"
+color green  start="<" end=">"
+color cyan   "<[^> ]+"
+color cyan   ">"
+color yellow start="<!DOCTYPE" end="[/]?>"
+color yellow start="<!--" end="-->"
+color red    "&[^;]*;"
+
+# CSS
+syntax "css" "\.css$"
+color brightred     "."
+color brightyellow  start="\{" end="\}"
+color brightwhite           start=":" end="[;^\{]"
+color brightblue    ":active|:focus|:hover|:link|:visited|:link|:after|:before|$"
+color brightblue    start="\/\*" end="\\*/"
+color green         ";|:|\{|\}"
+
+syntax "jsfiles" "(\.|/|)js$"
+## String
+color brightyellow "'(\\.|[^'])*'"
+color brightyellow ""(\\.|[^\"])*""
+## Keywords
+color green "\<(break|case|catch|continue|default|delete|do|else|finally)\>"
+color green "\<(for|function|if|in|instanceof|new|null|return|switch)\>"
+color green "\<(switch|this|throw|try|typeof|undefined|var|void|while|with)\>"
+## Type specifiers
+color red "\<(Array|Boolean|Date|Enumerator|Error|Function|Math)\>"
+color red "\<(Number|Object|RegExp|String)\>"
+color red "\<(true|false)\>"
+## Comments
+color magenta start="/\*" end="\*/"
+color magenta "//.*$"

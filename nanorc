@@ -19,7 +19,7 @@ include "/usr/share/nano/ruby.nanorc"
 include "/usr/share/nano/tex.nanorc"
 
 # HTML etc
-syntax "ml" ".*\.([jrs]?html?|xml|sgml?|tpl)$"
+syntax "ml" ".*\.([jrs]?html?|xml|sgml?|tpl|ctp)$"
 color white "^.+$"
 color green  start="<" end=">"
 color cyan   "<[^> ]+"

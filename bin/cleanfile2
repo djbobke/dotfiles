@@ -1,0 +1,22 @@
+#!/bin/bash
+
+FILE=$1
+
+if [ "$1" == "-h" ]; then
+	echo "usage: $0 <filename>"
+	echo " cleans if/for/while and switch statements"
+	echo " cleans ' ,' to ','"
+
+	exit 1;
+fi
+#cp $FILE $FILE.bak
+sed -i -e "s#if(#if (#g" \
+	-e "s#for(#for (#g" \
+	-e "s#while(#while (#g" \
+	-e "s#switch(#switch (#g" \
+	-e "s# ,#,#g" \
+	$FILE
+
+if [ "$2" == "-e" ]; then
+	sed -i -e 's#,\([^ ]\)#, \1#g' $FILE
+fi

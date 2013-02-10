@@ -42,7 +42,7 @@ while [[ $DUMPONCE = 0 || $FIRSTRUN = 1 ]]; do
     # Step 1: Start ping processes
     echo -n "."
     for (( i=1 ; i<=$MAXIP ; i++ )); do
-        ping -w 1 -c 1 ${SUBNET}.$i 2> /dev/null 1>/dev/null &
+        ping -w 3 -c 2 ${SUBNET}.$i 2> /dev/null 1>/dev/null &
         PID[$i]=$!
     done;
 

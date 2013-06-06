@@ -4,6 +4,9 @@
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 HISTCONTROL=ignoreboth
 
+# disable ctrl+s
+stty ixoff -ixon
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 

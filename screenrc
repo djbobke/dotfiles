@@ -7,29 +7,33 @@ shell bash
 # F12: next window
 # F11: prev window
 # F10: shift focus to other viewport (only when split)
-# F9 : split current viewport
-# F8 : remove current viewport (only when split)
+# F9 : remove current viewport (only when split)
+# F8 : split current viewport
+# F7 : vertical split current viewport
 bindkey -k F1 prev
 bindkey -k F2 next
 bindkey -k k; focus
-bindkey -k k9 split
-bindkey -k k8 remove
+bindkey -k k9 remove
+bindkey -k k8 split
+bindkey -k k7 split -v
 caption splitonly
 
-backtick 1 60 60 echo $LOGNAME
+attrcolor b ".I"
+nonblock on
 
+backtick 1 60 60 echo $LOGNAME
 # Show 'task bar' on last line
 hardstatus on
 hardstatus alwayslastline
 # No spacing
 # hardstatus string '%{= kw}[%{G}%1`@%H%{w}][%=%-Lw%{kR}(%{W}%n*%f%t%{kR})%{w}%+Lw%=%{w}][%{R}%l%{w}][%{B}%d-%m-%y %{W}%c:%s%{w}]'
 # With Spacing
-hardstatus string '%{= kw}[ %{G}%1`@%H%{w} ][ %=%-Lw%{kR}(%{W}%n*%f%t%{kR})%{w}%+Lw%= %{w}][ %{R}%l %{w}][ %{B}%d-%m-%y %{W}%c:%s%{w} ]'
+hardstatus string '%{= kw}{ %{G}%1`@%H %{w}}{ %=%-Lw%{G}(%{W}%n*%f%t%{G})%{w} %+Lw%= %{w}}{ %{G}%l %{w}}{ %{G}%d-%m-%y %{w}%c:%s%{w} }'
 
 # Default setup: four bashes
 screen 0 bash
 screen 1 bash
 screen 2 bash
 screen 3 bash
-next
+select 0
 

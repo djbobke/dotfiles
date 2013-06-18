@@ -11,3 +11,6 @@ alias l='ls -CF'
 alias diffpatch='diff -urpN --exclude=CVS --exclude=*~ --exclude=defconfig --exclude=.svn --exclude=.git --exclude=.repo'
 alias hd='hexdump -C'
 alias fgc='find -regex ".*\.\(c\|mk\|java\|h\|ctp\|cpp\|php\|S\)$" -print0 | xargs -0 grep --color=auto '
+
+alias ..='cd ..'
+alias ...='cd ../../'

@@ -2,7 +2,7 @@ startup_message off
 defscrollback 20000
 autodetach on
 vbell off
-shell bash
+shell -$SHELL
  
 # F12: next window
 # F11: prev window

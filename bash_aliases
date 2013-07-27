@@ -14,3 +14,4 @@ alias fgc='find -regex ".*\.\(c\|mk\|java\|h\|ctp\|cpp\|php\|S\)$" -print0 | xar
 
 alias ..='cd ..'
 alias ...='cd ../../'
+alias htop='env LANG=C htop'

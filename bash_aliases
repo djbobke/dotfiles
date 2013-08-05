@@ -6,7 +6,6 @@ alias egrep='egrep --color=auto --exclude-dir=".svn"'
 
 alias ll='ls -l'
 alias la='ls -A'
-alias l='ls -CF'
 
 alias diffpatch='diff -urpN --exclude=CVS --exclude=*~ --exclude=defconfig --exclude=.svn --exclude=.git --exclude=.repo'
 alias hd='hexdump -C'

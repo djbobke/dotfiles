@@ -62,3 +62,11 @@ export PATH=$PATH:/sbin:/usr/sbin
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 export SVN_EDITOR=nano
 export EDITOR=nano
+
+function cake {
+	if [ -d "Console" ]; then
+		sudo -u www-data ./Console/cake $@
+	else
+		echo "Not a CakePHP tree"
+	fi
+}

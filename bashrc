@@ -64,7 +64,9 @@ export SVN_EDITOR=nano
 export EDITOR=nano
 
 function cake {
-	if [ -d "Console" ]; then
+	if [ -d "../Vendor/bin" ]; then
+		sudo -u www-data ../Vendor/bin/cake $@
+	elif [ -d "Console" ]; then
 		sudo -u www-data ./Console/cake $@
 	else
 		echo "Not a CakePHP tree"

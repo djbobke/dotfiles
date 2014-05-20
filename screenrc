@@ -37,3 +37,5 @@ screen 2 bash
 screen 3 bash
 select 0
 
+blankerprg matrix
+idle 60 blanker

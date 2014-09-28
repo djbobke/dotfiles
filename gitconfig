@@ -32,11 +32,11 @@ llt = log -p trunk..
 lm = log master..
 llm = log -p master..
 b = branch -va
-cherry-pick-svn =  !GIT_EDITOR='sed -i /^git-svn-id:/d' git cherry-pick -e
 spull = !git svn fetch && git svn rebase
 spush = svn dcommit
 targz = !git archive --prefix=`basename $PWD`/ master | gzip > `basename $PWD`.tar.gz
 targz2 = !git archive --prefix=`basename $PWD`/ master | gzip > `basename $PWD`_tar_gz
+nstatus = !git rev-parse --abbrev-ref HEAD 2> /dev/null|sed -e 's/HEAD/detached*/' -e 's/^/(/' -e 's/$/)/'|xargs echo -n && ([ \"`git status --porcelain 2>/dev/null`\" != \"\" ] && echo \"*\" || echo "")
 
 # log
 l = log --graph --date=short

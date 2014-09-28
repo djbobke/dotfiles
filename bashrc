@@ -39,12 +39,6 @@ if [ -f ~/.bashmarks ]; then
     . ~/.bashmarks
 fi
 
-pidwait() {
-	while [[ ( -d /proc/$1 ) && ( -z `grep zombie /proc/$1/status` ) ]]; do
-		sleep 1
-	done
-}
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -59,6 +53,17 @@ export PATH=$PATH:/sbin:/usr/sbin
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 export SVN_EDITOR=nano
 export EDITOR=nano
+
+# TMUX-git
+if [ -f ~/.tmux-git ]; then
+    . ~/.tmux-git
+fi
+
+pidwait() {
+	while [[ ( -d /proc/$1 ) && ( -z `grep zombie /proc/$1/status` ) ]]; do
+		sleep 1
+	done
+}
 
 function cake {
 	if [ -d "../Vendor/bin" ]; then

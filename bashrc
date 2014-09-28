@@ -27,10 +27,7 @@ else
 	color_prompt=
 fi
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
+[ -x /usr/bin/dircolors ] && eval `dircolors -b $HOME/.dircolors`
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
@@ -68,6 +65,10 @@ function cake {
 		sudo -u www-data ../Vendor/bin/cake $@
 	elif [ -d "Console" ]; then
 		sudo -u www-data ./Console/cake $@
+	elif [ -d "app/Console" ]; then
+		cd app
+		sudo -u www-data ./Console/cake $@
+		cd ..
 	else
 		echo "Not a CakePHP tree"
 	fi

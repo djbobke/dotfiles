@@ -24,3 +24,5 @@ alias 'asg=suid-wrap aptitude safe-upgrade'
 alias 'as=aptitude search'
 alias 'acs=apt-cache search'
 alias 'aw=apt-cache show'
+
+alias 'tm=tmux -2'

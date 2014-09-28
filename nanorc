@@ -2,6 +2,11 @@
 set rebindkeypad
 set smooth
 set suspend
+set nowrap
+unset const
+unset morespace
+unset nohelp
+set tabsize 8
 
 include "/usr/share/nano/asm.nanorc"
 include "/usr/share/nano/groff.nanorc"

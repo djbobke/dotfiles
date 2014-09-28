@@ -14,3 +14,12 @@ alias fgc='find -regex ".*\.\(c\|mk\|java\|h\|ctp\|cpp\|php\|S\)$" -print0 | xar
 alias ..='cd ..'
 alias ...='cd ../../'
 alias htop='env LANG=C htop'
+
+alias 'ai=suid-wrap aptitude install'
+alias 'ar=suid-wrap aptitude remove'
+alias 'au=suid-wrap aptitude update'
+alias 'ag=suid-wrap aptitude upgrade'
+alias 'asg=suid-wrap aptitude safe-upgrade'
+alias 'as=aptitude search'
+alias 'acs=apt-cache search'
+alias 'aw=apt-cache show'

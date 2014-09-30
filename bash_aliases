@@ -26,3 +26,4 @@ alias 'acs=apt-cache search'
 alias 'aw=apt-cache show'
 
 alias 'tm=tmux -2'
+alias 'tma=tmux -2 attach'

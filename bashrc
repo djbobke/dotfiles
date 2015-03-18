@@ -84,3 +84,23 @@ function cake {
 		echo "Not a CakePHP tree"
 	fi
 }
+
+function ta()
+{
+	tmux attach -2 -t$1
+	if (($? > 0)); then
+		tmux -2
+	fi
+}
+tmux_sessions=$(tmux ls 2> /dev/null | cut -d : -f 1)
+complete -W "$tmux_sessions" ta
+
+function log()
+{
+	LOGDIR="$HOME/log"
+	LOGFILE=$(date +%Y%m%d_%H%M%S)
+	mkdir -p $LOGDIR
+	echo "Logging to $LOGDIR/$LOGFILE"
+	echo "Executing $1" > $LOGDIR/$LOGFILE
+	$1 | awk '{ print d,$0}' "d=[$(date "+%F %T")]" | tee $LOGDIR/$LOGFILE
+}

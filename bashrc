@@ -29,6 +29,11 @@ fi
 
 [ -x /usr/bin/dircolors ] && eval `dircolors -b $HOME/.dircolors`
 
+function cd {
+    builtin cd $@
+    pwd > ~/.last_dir
+}
+
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -56,7 +61,7 @@ export PATH=~/bin:$PATH
 
 # Add sbin to $PATH since some OS-es dont do this by default
 export PATH=$PATH:/sbin:/usr/sbin
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/\~}\007"'
 export SVN_EDITOR=nano
 export EDITOR=nano
 
@@ -87,7 +92,7 @@ function cake {
 
 function ta()
 {
-	tmux attach -2 -t$1
+	tmux -2 attach -t$1
 	if (($? > 0)); then
 		tmux -2
 	fi
@@ -104,3 +109,11 @@ function log()
 	echo "Executing $1" > $LOGDIR/$LOGFILE
 	$1 | awk '{ print d,$0}' "d=[$(date "+%F %T")]" | tee $LOGDIR/$LOGFILE
 }
+
+if [ -f ~/.last_dir ]; then
+	cd `cat ~/.last_dir`
+fi
+
+if [ -f ~/.bashrc_local ]; then
+	. ~/.bashrc_local
+fi

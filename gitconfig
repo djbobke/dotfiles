@@ -3,7 +3,7 @@ name = Rik van der Heijden
 email = mail@rikvanderheijden.com
 
 [github]
-user = djbobke
+user = rikvdh
 
 [core]
 
@@ -47,7 +47,7 @@ summary = true
 verbosity = 1
 
 [format]
-pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+pretty = format:%C(green)%ad%Creset %C(yellow)%h%C(red)%d%Creset %C(green)%s %C(magenta) [%an]%Creset
 
 [branch]
 autosetupmerge = true

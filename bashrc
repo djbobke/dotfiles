@@ -56,7 +56,9 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-export PS1="\[\e[0;32m\]\u\[\e[m\]@\[\e[0;31m\]\h \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[0m\]"
+
+export GIT_BRANCH='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1\ /`'
+export PS1="\[\e[1;36m\]\u@\[\e[1;36m\]\h \[\e[1;97m\]\w\[\e[m\] \[\e[1;33m\]$GIT_BRANCH\[\e[m\]\[\e[1;32m\]\$\[\e[m\] \[\e[0m\]"
 export PATH=~/bin:$PATH
 
 # Add sbin to $PATH since some OS-es dont do this by default

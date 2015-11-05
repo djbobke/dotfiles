@@ -1,4 +1,6 @@
-alias ls='ls --color=auto'
+if [ `uname -s | grep -i Linux` ]; then
+	alias ls='ls --color=auto'
+fi
 
 alias grep='grep --color=auto --exclude-dir=".svn"'
 alias fgrep='fgrep --color=auto --exclude-dir=".svn"'

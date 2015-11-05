@@ -21,6 +21,9 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 	color_prompt=yes
 else
@@ -101,6 +104,16 @@ function ta()
 }
 tmux_sessions=$(tmux ls 2> /dev/null | cut -d : -f 1)
 complete -W "$tmux_sessions" ta
+
+function ssh-copy-id()
+{
+	if [ ! -e ~/.ssh/id_rsa.pub ]; then
+		printf "You have no key to copy... \e[1;31m-_-\e[0;36m'\e[0m\n"
+		return 1
+	fi
+
+	cat ~/.ssh/id_rsa.pub | ssh $@ "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"
+}
 
 function log()
 {

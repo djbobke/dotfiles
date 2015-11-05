@@ -19,6 +19,8 @@ renames = true
 tool = meld
 
 [alias]
+subup = submodule update --init --recursive
+subpu = !git submodule foreach --recursive git checkout master && git submodule foreach --recursive git pull
 st = status
 d = diff
 ci = commit -v

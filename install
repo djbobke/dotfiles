@@ -14,3 +14,5 @@ for file in "$here"/*; do
     ln -sfv ${file#$HOME/} "${HOME}/${dotname}"
   fi
 done
+
+sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh

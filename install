@@ -8,7 +8,7 @@ here="$(cd "$here"; pwd)"
 
 for file in "$here"/*; do
   name="$(basename "$file" .md)"
-  [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
+  [[ $name = bin || $name = nano ]] && dotname="$name" || dotname=".${name}"
 
   if [[ !( ${ignores} =~ $name || -e ~/$dotname || -d $file/.git ) ]]; then
     ln -sfv ${file#$HOME/} "${HOME}/${dotname}"

@@ -18,12 +18,7 @@ alias ...='cd ../../'
 alias htop='env LANG=C htop'
 alias generate_poedit='cake i18n extract --overwrite --extract-core=no --merge=no --exclude $(pwd)/webroot/pma --output $(pwd)/Locale --paths $(pwd)/'
 
-alias 'ai=suid-wrap aptitude install'
-alias 'ar=suid-wrap aptitude remove'
-alias 'au=suid-wrap aptitude update'
-alias 'aup=suid-wrap aptitude upgrade'
-alias 'asup=suid-wrap aptitude safe-upgrade'
-alias 'as=aptitude search'
+alias 'apt-search=aptitude search'
 alias 'acs=apt-cache search'
 alias 'aw=apt-cache show'
 

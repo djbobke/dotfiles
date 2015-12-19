@@ -10,8 +10,13 @@ for file in "$here"/*; do
   name="$(basename "$file" .md)"
   [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
 
-  if [[ !( ${ignores} =~ $name || -e ~/$dotname || -d $file/.git ) ]]; then
-    ln -sfv ${file#$HOME/} "${HOME}/${dotname}"
+  if [[ !( ${ignores} =~ $name || -d $file/.git ) ]]; then
+    if [ ! -h ~/$dotname ]; then
+      rm -f ~/$dotname
+    fi
+    if [ ! -e ~/$dotname ]; then
+      ln -sfv ${file#$HOME/} "${HOME}/${dotname}"
+    fi
   fi
 done
 

@@ -6,10 +6,10 @@ set suspend
 set nowrap
 unset const
 unset morespace
-unset nohelp
+set nohelp
 set tabsize 8
 set historylog
-set autoindent
+#set autoindent
 
 include "~/.nano/apacheconf.nanorc"
 include "~/.nano/arduino.nanorc"
@@ -86,3 +86,4 @@ include "~/.nano/xresources.nanorc"
 include "~/.nano/yaml.nanorc"
 include "~/.nano/yum.nanorc"
 include "~/.nano/zsh.nanorc"
+include "~/.nanophp.nanorc"

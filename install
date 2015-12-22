@@ -11,7 +11,7 @@ for file in "$here"/*; do
   [[ $name = bin ]] && dotname="$name" || dotname=".${name}"
 
   if [[ !( ${ignores} =~ $name || -d $file/.git ) ]]; then
-    if [ ! -h ~/$dotname ]; then
+    if [ ! -h ~/$dotname ] && [ ! -d ~/$dotname ]; then
       rm -f ~/$dotname
     fi
     if [ ! -e ~/$dotname ]; then

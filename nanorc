@@ -9,6 +9,7 @@ unset morespace
 set nohelp
 set tabsize 8
 set historylog
+unset suspend
 #set autoindent
 
 include "~/.nano/apacheconf.nanorc"

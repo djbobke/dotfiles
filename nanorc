@@ -10,7 +10,7 @@ set nohelp
 set tabsize 8
 set historylog
 unset suspend
-#set autoindent
+unset autoindent
 
 include "~/.nano/apacheconf.nanorc"
 include "~/.nano/arduino.nanorc"

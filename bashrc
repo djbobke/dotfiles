@@ -57,7 +57,8 @@ fi
 export GIT_BRANCH='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1\ /`'
 export PS1="\[\e[1;36m\]\u@\[\e[1;36m\]\h \[\e[1;97m\]\w\[\e[m\] \[\e[1;33m\]$GIT_BRANCH\[\e[m\]\[\e[1;32m\]\$\[\e[m\] \[\e[0m\]"
 export PATH=~/bin:$PATH
-
+export GOPATH=~/go
+export GOBIN=~/bin
 # Add sbin to $PATH since some OS-es dont do this by default
 export PATH=$PATH:/sbin:/usr/sbin
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/\~}\007"'
@@ -69,11 +70,6 @@ export LESS_TERMCAP_me=$'\E[0m'           # end mode
 export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
 export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
-
-# TMUX-git
-if [ -f ~/.tmux-git ]; then
-    . ~/.tmux-git
-fi
 
 pidwait() {
 	while [[ ( -d /proc/$1 ) && ( -z `grep zombie /proc/$1/status` ) ]]; do
@@ -113,16 +109,6 @@ function ssh-copy-id()
 	fi
 
 	cat ~/.ssh/id_rsa.pub | ssh $@ "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"
-}
-
-function log()
-{
-	LOGDIR="$HOME/log"
-	LOGFILE=$(date +%Y%m%d_%H%M%S)
-	mkdir -p $LOGDIR
-	echo "Logging to $LOGDIR/$LOGFILE"
-	echo "Executing $1" > $LOGDIR/$LOGFILE
-	$1 | awk '{ print d,$0}' "d=[$(date "+%F %T")]" | tee $LOGDIR/$LOGFILE
 }
 
 if [ -f ~/.last_dir ]; then

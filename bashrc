@@ -113,7 +113,10 @@ function ssh-copy-id()
 }
 
 if [ -f ~/.last_dir ]; then
-	cd `cat ~/.last_dir`
+	LAST_DIR=`cat ~/.last_dir`
+	if [ -d "${LAST_DIR}" ]; then
+		builtin cd `cat ~/.last_dir`
+	fi
 fi
 
 if [ -f ~/.bashrc_local ]; then

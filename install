@@ -19,5 +19,3 @@ for file in "$here"/*; do
     fi
   fi
 done
-
-sh ${HOME}/.vim_runtime/install_awesome_vimrc.sh

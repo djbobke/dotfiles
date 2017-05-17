@@ -44,7 +44,7 @@ fi
 if [ -e /usr/share/terminfo/r/rxvt-256color ]; then
         export TERM='rxvt-256color'
 else
-        export TERM='xterm-color'
+        export TERM='xterm-256color'
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -57,10 +57,11 @@ fi
 export GIT_BRANCH='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1\ /`'
 export PS1="\[\e[1;36m\]\u@\[\e[1;36m\]\h \[\e[1;97m\]\w\[\e[m\] \[\e[1;33m\]$GIT_BRANCH\[\e[m\]\[\e[1;32m\]\$\[\e[m\] \[\e[0m\]"
 export PATH=~/bin:$PATH
-export GOPATH=~/go
-export GOBIN=~/bin
+export GOPATH=$HOME
+export GOBIN=$HOME/bin
 # Add sbin to $PATH since some OS-es dont do this by default
 export PATH=$PATH:/sbin:/usr/sbin
+export CDPATH=$HOME
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/\~}\007"'
 export EDITOR=nano
 

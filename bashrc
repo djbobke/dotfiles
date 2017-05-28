@@ -60,7 +60,7 @@ export PATH=~/bin:$PATH
 export GOPATH=$HOME
 export GOBIN=$HOME/bin
 # Add sbin to $PATH since some OS-es dont do this by default
-export PATH=$PATH:/sbin:/usr/sbin
+export PATH=$PATH:/sbin:/usr/sbin:/usr/local/go/bin
 export CDPATH=$HOME
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/\~}\007"'
 export EDITOR=nano
@@ -114,7 +114,7 @@ function ssh-copy-id()
 
 if [ -f ~/.last_dir ]; then
 	LAST_DIR=`cat ~/.last_dir`
-	if [ -d "${LAST_DIR}" ]; then
+	if [[ -d "${LAST_DIR}" && "$VSCODE_CLI" == "" ]]; then
 		builtin cd `cat ~/.last_dir`
 	fi
 fi

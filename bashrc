@@ -26,11 +26,6 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 [ -x /usr/bin/dircolors ] && eval `dircolors -b $HOME/.dircolors`
 
-function cd {
-    builtin cd $@
-    pwd > ~/.last_dir
-}
-
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -112,13 +107,23 @@ function ssh-copy-id()
 	cat ~/.ssh/id_rsa.pub | ssh $@ "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"
 }
 
+#
+# Remember last directory
+#
+function cd {
+    builtin cd $@
+    pwd > ~/.last_dir
+}
 if [ -f ~/.last_dir ]; then
 	LAST_DIR=`cat ~/.last_dir`
-	if [ -d "${LAST_DIR}" ]; then
+	if [[ -d "${LAST_DIR}" && "$VSCODE_PID" == "" ]]; then
 		builtin cd `cat ~/.last_dir`
 	fi
 fi
 
+#
+# Import local overrides
+#
 if [ -f ~/.bashrc_local ]; then
 	. ~/.bashrc_local
 fi

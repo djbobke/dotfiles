@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SERVER=$1
+SEQUENCE=$2
+
+for port in `echo $SEQUENCE|sed 's/,/ /g'`; do
+	nc -w 1 ${SERVER} ${port}
+done

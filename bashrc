@@ -73,6 +73,10 @@ pidwait() {
 	done
 }
 
+whoseport () {
+	lsof -P -i ":$1" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} LISTEN
+}
+
 function cake {
 	if [ -d "../Vendor/bin" ]; then
 		sudo -u www-data ../Vendor/bin/cake $@

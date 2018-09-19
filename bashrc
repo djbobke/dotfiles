@@ -56,7 +56,7 @@ export GOPATH=$HOME
 export GOBIN=$HOME/bin
 # Add sbin to $PATH since some OS-es dont do this by default
 export PATH=$PATH:/sbin:/usr/sbin:/usr/local/go/bin
-export CDPATH=$HOME
+export CDPATH=.:$HOME
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/\~}\007"'
 export EDITOR=nano
 

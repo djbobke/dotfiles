@@ -33,7 +33,7 @@ lt = log trunk..
 llt = log -p trunk..
 lm = log master..
 llm = log -p master..
-b = branch -va
+b = branch -vva
 spull = !git svn fetch && git svn rebase
 spush = svn dcommit
 targz = !git archive --prefix=`basename $PWD`/ master | gzip > `basename $PWD`.tar.gz

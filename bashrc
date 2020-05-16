@@ -115,13 +115,15 @@ function ssh-copy-id()
 # Remember last directory
 #
 function cd {
-    builtin cd $@
+    builtin cd "$@"
     pwd > ~/.last_dir
 }
 if [ -f ~/.last_dir ]; then
 	LAST_DIR=`cat ~/.last_dir`
 	if [[ -d "${LAST_DIR}" && "$VSCODE_PID" == "" ]]; then
-		builtin cd `cat ~/.last_dir`
+		if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+			builtin cd `cat ~/.last_dir`
+		fi
 	fi
 fi
 

@@ -36,11 +36,7 @@ if [ -f ~/.bashmarks ]; then
     . ~/.bashmarks
 fi
 
-if [ -e /usr/share/terminfo/r/rxvt-256color ]; then
-        export TERM='rxvt-256color'
-else
-        export TERM='xterm-256color'
-fi
+export TERM='xterm-256color'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -79,12 +75,12 @@ whoseport () {
 
 function cake {
 	if [ -d "../Vendor/bin" ]; then
-		sudo -u www-data ../Vendor/bin/cake $@
+		../Vendor/bin/cake $@
 	elif [ -d "Console" ]; then
-		sudo -u www-data ./Console/cake $@
+		./Console/cake $@
 	elif [ -d "app/Console" ]; then
 		cd app
-		sudo -u www-data ./Console/cake $@
+		./Console/cake $@
 		cd ..
 	else
 		echo "Not a CakePHP tree"

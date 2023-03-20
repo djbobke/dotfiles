@@ -1,5 +1,4 @@
 # nanorc
-set rebindkeypad
 set smooth
 set smarthome
 set suspend
@@ -9,7 +8,6 @@ set numbercolor brightyellow,black
 set titlecolor brightyellow,black
 set positionlog
 set unix
-unset const
 set morespace
 set nohelp
 set tabsize 8

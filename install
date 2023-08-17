@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ./git-completion.bash
+
 ignores="install readme"
 
 here="$(dirname "$0")"

@@ -2,9 +2,7 @@ if [ `uname -s | grep -i Linux` ]; then
 	alias ls='ls --color=auto'
 fi
 
-alias grep='grep --color=auto --exclude-dir=".svn"'
-alias fgrep='fgrep --color=auto --exclude-dir=".svn"'
-alias egrep='egrep --color=auto --exclude-dir=".svn"'
+alias grep='grep --color=auto'
 
 alias ll='ls -l'
 alias la='ls -A'

@@ -4,6 +4,10 @@
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 HISTCONTROL=ignoreboth
 
+export HISTTIMEFORMAT='%F %T '  # Adds date and time to each command in history.
+export HISTSIZE=10000           # Store a larger command history.
+export HISTFILESIZE=20000       # Allow larger history files.
+
 # disable ctrl+s
 stty ixoff -ixon
 
@@ -36,7 +40,7 @@ if [ -f ~/.bashmarks ]; then
     . ~/.bashmarks
 fi
 
-export TERM='xterm-256color'
+export TERM=${TERM:-xterm-256color}
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -45,7 +49,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export GIT_BRANCH='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\\\\\1\ /`'
+export GIT_BRANCH='$(git rev-parse --abbrev-ref HEAD 2>/dev/null)'
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export PS1="\[\e[1;36m\]\u@\[\e[1;36m\]\h \[\e[1;97m\]\w\[\e[m\] \[\e[1;33m\]$GIT_BRANCH\[\e[m\]\[\e[1;32m\]\$\[\e[m\] \[\e[0m\]"
 export PATH=~/bin:./vendor/bin:$PATH
 export GOPATH=$HOME
@@ -53,7 +59,7 @@ export GOBIN=$HOME/bin
 # Add sbin to $PATH since some OS-es dont do this by default
 export PATH=$PATH:/sbin:/usr/sbin:/usr/local/go/bin
 export CDPATH=.:$HOME
-export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/\~}\007"'
+export PROMPT_COMMAND='pwd > ~/.last_dir; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/\~}\007"'
 export EDITOR=nano
 
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
@@ -67,24 +73,6 @@ pidwait() {
 	while [[ ( -d /proc/$1 ) && ( -z `grep zombie /proc/$1/status` ) ]]; do
 		sleep 1
 	done
-}
-
-whoseport () {
-	lsof -P -i ":$1" | grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn} LISTEN
-}
-
-function cake {
-	if [ -d "../Vendor/bin" ]; then
-		../Vendor/bin/cake $@
-	elif [ -d "Console" ]; then
-		./Console/cake $@
-	elif [ -d "app/Console" ]; then
-		cd app
-		./Console/cake $@
-		cd ..
-	else
-		echo "Not a CakePHP tree"
-	fi
 }
 
 function ta()
@@ -110,10 +98,6 @@ function ssh-copy-id()
 #
 # Remember last directory
 #
-function cd {
-    builtin cd "$@"
-    pwd > ~/.last_dir
-}
 if [ -f ~/.last_dir ]; then
 	LAST_DIR=`cat ~/.last_dir`
 	if [[ -d "${LAST_DIR}" && "$VSCODE_PID" == "" ]]; then

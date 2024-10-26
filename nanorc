@@ -15,7 +15,7 @@ set historylog
 unset suspend
 set casesensitive
 unset autoindent
-unset mouse
+set mouse
 set multibuffer
 
 bind M-J prevbuf all
